@@ -1,5 +1,7 @@
 ### Data set up
-- Download the sentence embeddings from https://drive.google.com/open?id=1Bgnxqn0drNvIZgQ0-DjmzhP7mZAAVP7T 
+- CUB sentence embeddings: https://drive.google.com/file/d/1SmxwLz11fUfHj_-Z8X7WYTwCgNjqjfc_/view?usp=sharing
+- Flowers sentence embeddings: https://drive.google.com/file/d/1YAkfaGsue7hE-QGu0IqYTUAFbm_7MGRo/view?usp=sharing
+
 ```
 unzip cub_sentence_embs.zip
 mv cub_sentence_embs/train/*.csv ./datasets/edges2birds/
