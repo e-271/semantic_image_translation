@@ -19,11 +19,16 @@ See training and test tips at: https://github.com/junyanz/pytorch-CycleGAN-and-p
 See frequently asked questions at: https://github.com/junyanz/pytorch-CycleGAN-and-pix2pix/blob/master/docs/qa.md
 """
 import time
+import pdb
+import os
+import numpy as np
+import ntpath
 from options.train_options import TrainOptions
 from data import create_dataset
 from models import create_model
+from util.util import tensor2im
 from util.visualizer import Visualizer
-import pdb
+from util.logger import Logger
 
 if __name__ == '__main__':
     opt = TrainOptions().parse()   # get training options
@@ -34,6 +39,11 @@ if __name__ == '__main__':
     model.setup(opt)               # regular setup: load and print networks; create schedulers
     visualizer = Visualizer(opt)   # create a visualizer that display/save images and plots
     total_iters = 0                # the total number of training iterations
+
+    tblogger_dir = os.path.join(opt.checkpoints_dir, opt.name, 'logs')
+    if not os.path.exists(tblogger_dir):
+        os.mkdir(tblogger_dir)
+    logger = Logger(tblogger_dir)
 
     for epoch in range(opt.epoch_count, opt.niter + opt.niter_decay + 1):    # outer loop for different epochs; we save the model by <epoch_count>, <epoch_count>+<save_latest_freq>
         epoch_start_time = time.time()  # timer for entire epoch
@@ -57,12 +67,33 @@ if __name__ == '__main__':
                 model.compute_visuals()
                 visualizer.display_current_results(model.get_current_visuals(), epoch, save_result)
 
+                #### Tensorboard ####
+                #  Log training images (image summary)
+                visuals = model.get_current_visuals() # get image results
+                # img_path = model.get_image_paths()     # get image paths
+                # short_path = ntpath.basename(img_path[0])
+                # name = os.path.splitext(short_path)[0]
+
+                for label, image in visuals.items():
+                    image_numpy = np.reshape(tensor2im(image), (-1, 256, 256, 3))
+                    # image_name = '%s_%s.png' % (name, label)
+                    logger.image_summary(label, image_numpy, epoch_iter)
+
+                #####################
+
             if total_iters % opt.print_freq == 0:    # print training losses and save logging information to the disk
                 losses = model.get_current_losses()
                 t_comp = (time.time() - iter_start_time) / opt.batch_size
                 visualizer.print_current_losses(epoch, epoch_iter, losses, t_comp, t_data)
                 if opt.display_id > 0:
                     visualizer.plot_current_losses(epoch, float(epoch_iter) / dataset_size, losses)
+
+                #### Tensorboard ####
+                # Log scalar values (scalar summary)
+                # losses (OrderedDict) -- training losses stored in the format of (name, float) pairs
+                for tag, value in losses.items():
+                    logger.scalar_summary(tag, value, epoch_iter)
+                #####################
 
             if total_iters % opt.save_latest_freq == 0:   # cache our latest model every <save_latest_freq> iterations
                 print('saving the latest model (epoch %d, total_iters %d)' % (epoch, total_iters))

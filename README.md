@@ -15,33 +15,39 @@ bash ./scripts/download_preprocessed_data.sh
 Train with semantic pix2pix
 ```
 python train.py \
-      --dataroot ./datasets/edges2flowers \
-      --name test_pix2pix \
+      --dataroot /work/cascades/jiaruixu/dataset/edges2flowers \
+      --name semantic_pix2pix \
       --model semantic_pix2pix \
       --direction AtoB \
       --dataset_mode semantic \
-      --display_id -1 \
-      --no_html
+      --checkpoints_dir /work/cascades/jiaruixu/pix2pix/ \
+      --display_id -1
 ```
 
 Train with pix2pix
 ```
 python train.py \
-      --dataroot ./datasets/edges2flowers \
-      --name test_pix2pix \
+      --dataroot /work/cascades/jiaruixu/dataset/edges2flowers \
+      --name pix2pix \
       --model pix2pix \
       --direction AtoB \
       --dataset_mode semantic \
-      --display_id -1 \
-      --no_html
+      --checkpoints_dir /work/cascades/jiaruixu/pix2pix/ \
+      --display_id -1
+```
+
+### Tensorboard for training logs
+
+```
+tensorboard --logdir=/work/cascades/jiaruixu/pix2pix/[exp_name]/logs
 ```
 
 ### Test
 
 ```
 python test.py \
-       --dataroot ./datasets/edges2flowers \
-       --name test_pix2pix \
+       --dataroot /work/cascades/jiaruixu/dataset/edges2flowers \
+       --name semantic_pix2pix \
        --model semantic_pix2pix \
        --dataset_mode semantic \
        --direction AtoB
