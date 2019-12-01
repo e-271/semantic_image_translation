@@ -11,8 +11,9 @@ python ./scripts/download_data.py 1YAkfaGsue7hE-QGu0IqYTUAFbm_7MGRo ./datasets/f
 
 cd datasets
 unzip cub_sentence_embs.zip
-mkdir edges2birds
-mv cub_sentence_embs/train/*.txt ./edges2birds/
+mkdir -r edges2birds/train
+mv cub/train/*.csv ./edges2birds/train/
 
 unzip flowers_semantic.zip
-mkdir edges2flowers
+mkdir -r edges2flowers/train
+mv flowers/train/*.csv edges2flowers/train/

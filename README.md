@@ -15,7 +15,7 @@ bash ./scripts/download_preprocessed_data.sh
 Train with semantic pix2pix
 ```
 python train.py \
-      --dataroot ./datasets/flowers_samples \
+      --dataroot ./datasets/edges2flowers \
       --name test_pix2pix \
       --model sementic_pix2pix \
       --direction AtoB \
@@ -27,7 +27,7 @@ python train.py \
 Train with pix2pix
 ```
 python train.py \
-      --dataroot ./datasets/flowers_samples \
+      --dataroot ./datasets/edges2flowers \
       --name test_pix2pix \
       --model pix2pix \
       --direction AtoB \
