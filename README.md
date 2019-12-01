@@ -17,7 +17,7 @@ Train with semantic pix2pix
 python train.py \
       --dataroot ./datasets/edges2flowers \
       --name test_pix2pix \
-      --model sementic_pix2pix \
+      --model semantic_pix2pix \
       --direction AtoB \
       --dataset_mode semantic \
       --display_id -1 \
@@ -36,7 +36,16 @@ python train.py \
       --no_html
 ```
 
+### Test
 
+```
+python test.py \
+       --dataroot ./datasets/edges2flowers \
+       --name test_pix2pix \
+       --model semantic_pix2pix \
+       --dataset_mode semantic \
+       --direction AtoB
+```
 
 ### Acknowledgments
 Our code is based on [pytorch-CycleGAN-and-pix2pix](https://github.com/junyanz/pytorch-CycleGAN-and-pix2pix)
