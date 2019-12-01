@@ -23,6 +23,7 @@ from options.train_options import TrainOptions
 from data import create_dataset
 from models import create_model
 from util.visualizer import Visualizer
+import pdb
 
 if __name__ == '__main__':
     opt = TrainOptions().parse()   # get training options
@@ -47,6 +48,7 @@ if __name__ == '__main__':
 
             total_iters += opt.batch_size
             epoch_iter += opt.batch_size
+            # import pdb; pdb.set_trace()
             model.set_input(data)         # unpack data from dataset and apply preprocessing
             model.optimize_parameters()   # calculate loss functions, get gradients, update network weights
 

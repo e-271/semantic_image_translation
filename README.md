@@ -1,14 +1,42 @@
-### Data set up
-- CUB sentence embeddings: https://drive.google.com/file/d/1SmxwLz11fUfHj_-Z8X7WYTwCgNjqjfc_/view?usp=sharing
-- Flowers sentence embeddings: https://drive.google.com/file/d/1YAkfaGsue7hE-QGu0IqYTUAFbm_7MGRo/view?usp=sharing
-
-Also available in /work/cascades/erobb/edges2flowers and /works/cascades/erobb/edges2birds.
-
+### Installation
+For conda users, you can create an environment using
 ```
-unzip cub_sentence_embs.zip
-mv cub_sentence_embs/train/*.csv ./datasets/edges2birds/
+conda create -n pix2pix python=3.5.5
+bash ./scripts/conda_deps.sh
 ```
 
+### Download Dataset
+
+```
+bash ./scripts/download_preprocessed_data.sh
+```
 
 ### Train
-`python train.py --dataroot ./datasets/edges2birds --name test_pix2pix --model pix2pix --direction BtoA --dataset_mode semantic`
+Train with semantic pix2pix
+```
+python train.py \
+      --dataroot ./datasets/flowers_samples \
+      --name test_pix2pix \
+      --model sementic_pix2pix \
+      --direction AtoB \
+      --dataset_mode semantic \
+      --display_id -1 \
+      --no_html
+```
+
+Train with pix2pix
+```
+python train.py \
+      --dataroot ./datasets/flowers_samples \
+      --name test_pix2pix \
+      --model pix2pix \
+      --direction AtoB \
+      --dataset_mode semantic \
+      --display_id -1 \
+      --no_html
+```
+
+
+
+### Acknowledgments
+Our code is based on [pytorch-CycleGAN-and-pix2pix](https://github.com/junyanz/pytorch-CycleGAN-and-pix2pix)
