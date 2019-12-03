@@ -70,15 +70,17 @@ if __name__ == '__main__':
                 #### Tensorboard ####
                 #  Log training images (image summary)
                 visuals = model.get_current_visuals() # get image results
-                # img_path = model.get_image_paths()     # get image paths
-                # short_path = ntpath.basename(img_path[0])
-                # name = os.path.splitext(short_path)[0]
-
-                for label, image in visuals.items():
-                    image_numpy = np.reshape(tensor2im(image), (-1, 256, 256, 3))
-                    # image_name = '%s_%s.png' % (name, label)
-                    logger.image_summary(label, image_numpy, epoch_iter)
-
+                img_path = model.get_image_paths()     # get image paths
+                short_path = ntpath.basename(img_path[0])
+                name = os.path.splitext(short_path)[0]
+                # images = []
+                # for label, image in visuals.items():
+                #     import pdb; pdb.set_trace()
+                #     image_numpy = np.reshape(tensor2im(image), (-1, 256, 256, 3))
+                #     images.append(image_numpy)
+                #     # image_name = '%s_%s.png' % (name, label)
+                #     logger.image_summary(label, image_numpy, total_iters)
+                logger.image_summary(name, visuals, total_iters)
                 #####################
 
             if total_iters % opt.print_freq == 0:    # print training losses and save logging information to the disk
@@ -92,7 +94,7 @@ if __name__ == '__main__':
                 # Log scalar values (scalar summary)
                 # losses (OrderedDict) -- training losses stored in the format of (name, float) pairs
                 for tag, value in losses.items():
-                    logger.scalar_summary(tag, value, epoch_iter)
+                    logger.scalar_summary(tag, value, total_iters)
                 #####################
 
             if total_iters % opt.save_latest_freq == 0:   # cache our latest model every <save_latest_freq> iterations

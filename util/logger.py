@@ -6,7 +6,7 @@ try:
     from StringIO import StringIO  # Python 2.7
 except ImportError:
     from io import BytesIO         # Python 3.x
-
+from .util import tensor2im
 
 class Logger(object):
 
@@ -19,16 +19,19 @@ class Logger(object):
         summary = tf.Summary(value=[tf.Summary.Value(tag=tag, simple_value=value)])
         self.writer.add_summary(summary, step)
 
-    def image_summary(self, tag, images, step):
+    def image_summary(self, name, visuals, step):
         """Log a list of images."""
 
         img_summaries = []
-        for i, img in enumerate(images):
+        # for i, img in enumerate(images):
+        for label, image in visuals.items():
             # Write the image to a string
             try:
                 s = StringIO()
             except:
                 s = BytesIO()
+            # img = np.reshape(tensor2im(image), (-1, 256, 256, 3))
+            img = tensor2im(image)
             scipy.misc.toimage(img).save(s, format="png")
 
             # Create an Image object
@@ -36,7 +39,7 @@ class Logger(object):
                                        height=img.shape[0],
                                        width=img.shape[1])
             # Create a Summary value
-            img_summaries.append(tf.Summary.Value(tag='%s/%d' % (tag, i), image=img_sum))
+            img_summaries.append(tf.Summary.Value(tag='%s/%s' % (name, label), image=img_sum))
 
         # Create and write Summary
         summary = tf.Summary(value=img_summaries)
