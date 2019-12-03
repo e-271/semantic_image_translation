@@ -32,7 +32,7 @@ from data import create_dataset
 from models import create_model
 from util.visualizer import save_images
 from util import html
-
+import numpy as np
 
 if __name__ == '__main__':
     opt = TestOptions().parse()  # get test options
@@ -56,6 +56,7 @@ if __name__ == '__main__':
     # For [CycleGAN]: It should not affect CycleGAN as CycleGAN uses instancenorm without dropout.
     if opt.eval:
         model.eval()
+    diffs = []
     for i, data in enumerate(dataset):
         if i >= opt.num_test:  # only apply our model to opt.num_test images.
             break
@@ -66,4 +67,7 @@ if __name__ == '__main__':
         if i % 5 == 0:  # save images to an HTML file
             print('processing (%04d)-th image... %s' % (i, img_path))
         save_images(webpage, visuals, img_path, aspect_ratio=opt.aspect_ratio, width=opt.display_winsize)
+        diff = (visuals['fake_B'] - visuals['real_B']).abs().mean().item()
+        diffs.append(diff)
+    print('Average MAE over test: ', np.mean(diffs))
     webpage.save()  # save the HTML
