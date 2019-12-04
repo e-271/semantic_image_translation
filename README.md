@@ -43,6 +43,7 @@ tensorboard --logdir=/work/cascades/jiaruixu/pix2pix/[exp_name]/logs
 ```
 
 ### Test
+Copy checkpoints intto ./checkpoints/semantic_pix2pix_flowers/semantic_pix2pix
 
 ```
 python test.py \
@@ -51,6 +52,7 @@ python test.py \
        --model semantic_pix2pix \
        --dataset_mode semantic \
        --direction AtoB
+       --checkpoints_dir ./checkpoints/semantic_pix2pix_flowers
 ```
 
 ### Acknowledgments
