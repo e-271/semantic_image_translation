@@ -3,6 +3,7 @@ This is our Deep Learning course project ([Jiarui Xu](https://github.com/jiaruix
 
 ![Semantic Pix2Pix](./imgs/workflow.png)
 
+### Sample results
 ![Sample results](./imgs/results.png)
 
 ### Installation
