@@ -62,8 +62,8 @@ class SemanticDataset(BaseDataset):
         try:
             emb_path = self.AB_paths[index][:-7] + '.csv' # Replace _AB.jpg with .csv
             emb = np.genfromtxt(emb_path)
-            emb = 2 * (emb - np.min(emb)) / (np.max(emb) - np.min(emb)) - 1 # [-1, 1] scaling
             emb = emb.mean(0) # average over 10 sentences, the sentence embeddings are 1x4096
+            emb = 2 * (emb - np.min(emb)) / (np.max(emb) - np.min(emb)) - 1 # [-1, 1] scaling
             return {'A': A, 'B': B, 'E': emb, 'A_paths': AB_path, 'B_paths': AB_path}
         except Exception as e:
             return {'A': A, 'B': B, 'A_paths': AB_path, 'B_paths': AB_path}
