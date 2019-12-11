@@ -16,11 +16,19 @@ Train with semantic pix2pix
 ```
 python train.py \
       --dataroot /work/cascades/jiaruixu/dataset/edges2flowers \
-      --name semantic_pix2pix \
-      --model semantic_pix2pix \
+      --name semanticv2_pix2pix \
+      --model semanticv2_pix2pix \
       --direction AtoB \
       --dataset_mode semantic \
       --checkpoints_dir /work/cascades/jiaruixu/pix2pix/ \
+      --display_id -1
+
+python train.py \
+      --dataroot datasets/flowers_samples \
+      --name semanticv2_pix2pix_debug \
+      --model semanticv2_pix2pix \
+      --direction AtoB \
+      --dataset_mode semantic \
       --display_id -1
 ```
 
@@ -42,7 +50,7 @@ python train.py \
 tensorboard --logdir=/work/cascades/jiaruixu/pix2pix/[exp_name]/logs
 ```
 
-### Test
+### Test with default sentences
 
 ```
 python test.py \
@@ -53,5 +61,35 @@ python test.py \
        --direction AtoB
 ```
 
+### Test on customized sketches/edge maps with customized sentences
+
+#### Download word vectors
+Download GloVe (V1) vectors:
+```
+mkdir GloVe
+curl -Lo GloVe/glove.840B.300d.zip http://nlp.stanford.edu/data/glove.840B.300d.zip
+unzip GloVe/glove.840B.300d.zip -d GloVe/
+```
+
+#### Use InferSent sentence encoder
+
+```
+mkdir encoder
+curl -Lo encoder/infersent1.pkl https://dl.fbaipublicfiles.com/infersent/infersent1.pkl
+```
+
+#### Test on customized sketches/edge maps with customized sentences
+
+```
+python edge2imgsample.py \
+       --dataroot ./datasets/flower_samples \
+       --checkpoints_dir /work/cascades/jiaruixu/pix2pix/ \
+       --sentence_file flowersample.txt \
+       --results_dir results \
+       --model semanticv2_pix2pix \
+       --name semanticv2_pix2pix_flowers \
+       --dataset_mode semantic
+
+```
 ### Acknowledgments
-Our code is based on [pytorch-CycleGAN-and-pix2pix](https://github.com/junyanz/pytorch-CycleGAN-and-pix2pix)
+Our code is based on [pytorch-CycleGAN-and-pix2pix](https://github.com/junyanz/pytorch-CycleGAN-and-pix2pix) and [InferSent](https://github.com/facebookresearch/InferSent)

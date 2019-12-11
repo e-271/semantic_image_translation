@@ -41,3 +41,9 @@ test/.coverage
 test/data/legacy_serialized.pt
 *~
 .idea
+
+log/
+GloVe/
+encoder/
+scripts/*.qsub
+scripts/*.qsub.*
