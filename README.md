@@ -50,18 +50,14 @@ python train.py \
 tensorboard --logdir=/work/cascades/jiaruixu/pix2pix/[exp_name]/logs
 ```
 
-<<<<<<< HEAD
 ### Test with default sentences
-=======
-### Test
-Copy checkpoints intto ./checkpoints/semantic_pix2pix_flowers/semantic_pix2pix
->>>>>>> f4253224aa966111d185a7ac0c09552458347cb6
+Copy checkpoints into `./checkpoints/semanticv2_pix2pix_flowers/semanticv2_pix2pix`
 
 ```
 python test.py \
        --dataroot /work/cascades/jiaruixu/dataset/edges2flowers \
-       --name semantic_pix2pix \
-       --model semantic_pix2pix \
+       --name semanticv2_pix2pix_flowers \
+       --model semanticv2_pix2pix \
        --dataset_mode semantic \
        --direction AtoB
        --checkpoints_dir ./checkpoints/semantic_pix2pix_flowers
