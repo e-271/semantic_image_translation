@@ -1,9 +1,9 @@
 ## Semantic Pix2Pix
 This is our Deep Learning course project ([Jiarui Xu](https://github.com/jiaruixu), [Esther Robb](https://github.com/e-271), [Si Chen](https://github.com/SCccc21)). Our purpose of this project is to manipulate the attributes of the generated images with sentence embeddings.
 
-![Semantic Pix2Pix](./images/workflow.png)
+![Semantic Pix2Pix](./imgs/workflow.png)
 
-![Sample results](./images/results.png)
+![Sample results](./imgs/results.png)
 
 ### Installation
 For conda users, you can create an environment using
