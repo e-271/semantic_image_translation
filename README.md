@@ -15,9 +15,8 @@ bash ./scripts/conda_deps.sh
 
 ### Download Dataset
 
-```
-bash ./scripts/download_preprocessed_data.sh
-```
+Edges2Flowers:
+https://drive.google.com/file/d/1SdR1HLVILe116aCPdQMomg_aUFpsSoe0/view?usp=sharing
 
 ### Train
 Train with semantic pix2pix
