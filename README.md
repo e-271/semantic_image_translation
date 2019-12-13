@@ -1,5 +1,5 @@
 ## Semantic Pix2Pix
-This is our Deep Learning course project ([Jiarui Xu](https://github.com/jiaruixu), [Esther Robb](https://github.com/e-271), [Si Chen](https://github.com/SCccc21)). Our purpose of this project is to manipulate the attributes of the generated images with sentence embeddings.
+This is our Deep Learning course project ([Jiarui Xu](https://github.com/jiaruixu), [Esther Robb](https://github.com/e-271), [Si Chen](https://github.com/SCccc21)). Our purpose of this project is to manipulate the attributes of the generated images with sentence embeddings. Our [Project Video](https://youtu.be/VBzIQUTsAjg) describes the approach and results in more details.
 
 ![Semantic Pix2Pix](./imgs/workflow.png)
 
